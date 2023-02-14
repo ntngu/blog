@@ -1,8 +1,10 @@
+import react from "react";
+import { Blog } from "../../types/blog";
+
 const Home = () => {
-  return (
-    <>
-    </>
-  );
-}
+  const [blogs, setBlogs] = react.useState<Blog[]>([]);
+
+  return <></>;
+};
 
 export default Home;
