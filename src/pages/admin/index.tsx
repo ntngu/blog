@@ -1,4 +1,5 @@
 import react from "react";
+import { useRouter } from "next/router";
 import { User } from "../../types/user";
 import { Blog } from "../../types/blog";
 import loginService from "../../services/login";
@@ -10,9 +11,9 @@ const Admin = () => {
   const [blogs, setBlogs] = react.useState<Blog[]>([]);
   const [username, setUsername] = react.useState<string>("");
   const [password, setPassword] = react.useState<string>("");
-  const [title, setTitle] = react.useState<string>("");
-  const [content, setContent] = react.useState<string>("");
   const [message, setMessage] = react.useState<string>("");
+
+  const router = useRouter();
 
   const handleLogin = async (event: react.FormEvent) => {
     event.preventDefault();
@@ -39,25 +40,6 @@ const Admin = () => {
     setUser(undefined);
   };
 
-  const handleCreate = async (event: react.FormEvent) => {
-    event.preventDefault();
-    try {
-      const blog = {
-        title: title,
-        content: content,
-        date: new Date().toString(),
-      };
-      const response = await blogService.create(blog);
-      setBlogs([...blogs, response]);
-      setMessage(`${title} posted...`);
-      setTimeout(() => {
-        setMessage("");
-      }, 5000);
-    } catch (err) {
-      setMessage(`${title} could not be posted...`);
-    }
-  };
-
   const usernameChange = (e: react.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setUsername(value);
@@ -66,16 +48,6 @@ const Admin = () => {
   const passwordChange = (e: react.ChangeEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value;
     setPassword(value);
-  };
-
-  const titleChange = (e: react.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setTitle(value);
-  };
-
-  const contentChange = (e: react.ChangeEvent) => {
-    const value = (e.target as HTMLInputElement).value;
-    setContent(value);
   };
 
   react.useEffect(() => {
@@ -99,7 +71,7 @@ const Admin = () => {
 
   return (
     <div className="flex h-screen w-screen bg-gray-300">
-      
+      <button type="button" onClick={() => router.push("/admin/post")}>as</button> 
     </div>
   );
 };

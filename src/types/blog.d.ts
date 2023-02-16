@@ -1,5 +1,5 @@
 export interface Blog {
-  title: string;
-  date: string;
-  content: string;
+  title: string | undefined;
+  date: string | undefined;
+  content: string | undefined;
 }
