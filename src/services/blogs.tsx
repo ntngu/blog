@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Credentials } from "../../types/credentials";
-import { Blog } from "../../types/blog";
+import { Credentials } from "../types/credentials";
+import { Blog } from "../types/blog";
 const baseUrl = "/api/login";
 
 let token: string = "";
