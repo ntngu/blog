@@ -12,6 +12,7 @@ const Admin = () => {
   const [username, setUsername] = react.useState<string>("");
   const [password, setPassword] = react.useState<string>("");
   const [message, setMessage] = react.useState<string>("");
+  const [loading, setLoading] = react.useState<boolean>(true);
 
   const router = useRouter();
 
@@ -57,7 +58,14 @@ const Admin = () => {
       setUser(user);
       blogService.setToken(user.token);
     }
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return (
+      <div></div>
+    )
+  }
 
   if (!user) {
     return (
@@ -71,7 +79,8 @@ const Admin = () => {
 
   return (
     <div className="flex h-screen w-screen bg-gray-300">
-      <button type="button" onClick={() => router.push("/admin/post")}>as</button> 
+      <button type="button"> </button>
+      <button type="button" onClick={() => router.push("/admin/post")}>Submit a post</button> 
     </div>
   );
 };
