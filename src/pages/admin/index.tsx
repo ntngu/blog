@@ -27,6 +27,8 @@ const Admin = () => {
       setUsername("");
       setPassword("");
       setUser(user);
+      blogService.setToken(user.token);
+      console.log(user.token);
     } catch (err) {
       setMessage("Wrong username or password");
       setTimeout(() => {
@@ -57,6 +59,11 @@ const Admin = () => {
       const user = JSON.parse(userToken);
       setUser(user);
       blogService.setToken(user.token);
+      blogService
+        .getAll()
+        .then((blogs) => {
+          setBlogs(blogs);
+        });
     }
     setLoading(false);
   }, []);
