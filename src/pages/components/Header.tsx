@@ -21,6 +21,13 @@ const Header = ({ handleTabChange }: Header) => {
         >
           Blogs
         </button>
+        <button
+          className="rounded m-2 p-2 border border-[#0F151E] hover:border-[#D3DAE0]"
+          type="button"
+          onClick={() => handleTabChange("About")}
+        >
+          About
+        </button>
       </div>
     </div>
   );

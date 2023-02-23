@@ -1,15 +1,11 @@
 import react from "react";
-import dynamic from "next/dynamic";
 import "@uiw/react-markdown-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 import { Blog } from "../types/blog";
 import BlogService from "@/services/blogs";
-import Header from "@/pages/components/Header";
-
-const MarkdownPreview = dynamic(
-  () => import("@uiw/react-markdown-preview").then((mod) => mod.default),
-  { ssr: false }
-);
+import HomePage from "./components/Home";
+import Blogs from "./components/Blogs";
+import About from "./components/About";
 
 const Home = () => {
   const [blogs, setBlogs] = react.useState<Blog[]>([]);
@@ -33,32 +29,22 @@ const Home = () => {
 
   const handleTabChange = (str: string) => {
     setActiveTab(str);
-  }
+  };
 
-  if (activeTab === "Home") {
-    return (
-      <div className=" bg-[#0F151E] w-screen h-screen">
-        <Header handleTabChange={handleTabChange}/>
-        <div className="flex justify-center items-center flex-col">
-          <h1 className="text-[#D3DAE0] text-3xl p-10">{title}</h1>
-          <MarkdownPreview
-            className="w-[58rem] p-10 mb-5"
-            source={content}
-          />
-        </div>
-      </div>
-    );
-  } else if (activeTab === "Blogs") {
-    return (
-      <div className=" bg-[#0F151E] w-screen h-screen">
-        <Header handleTabChange={handleTabChange}/>
-        <div className="flex justify-center items-center flex-col">
-          <h1 className="text-[#D3DAE0] text-3xl p-10">Work In Progress...</h1>
-        </div>
-      </div>
-    )
+  switch (activeTab) {
+    case "Home":
+      return (
+        <HomePage
+          handleTabChange={handleTabChange}
+          content={content}
+          title={title}
+        />
+      );
+    case "Blogs":
+      return <Blogs handleTabChange={handleTabChange} />;
+    default:
+      return <About handleTabChange={handleTabChange} />;
   }
-  
 };
 
 export default Home;
