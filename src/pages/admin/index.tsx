@@ -5,6 +5,7 @@ import { Blog } from "../../types/blog";
 import loginService from "../../services/login";
 import blogService from "../../services/blogs";
 import Login from "./components/Login";
+import BlogItem from "./BlogItem";
 
 const Admin = () => {
   const [user, setUser] = react.useState<User>();
@@ -59,19 +60,15 @@ const Admin = () => {
       const user = JSON.parse(userToken);
       setUser(user);
       blogService.setToken(user.token);
-      blogService
-        .getAll()
-        .then((blogs) => {
-          setBlogs(blogs);
-        });
+      blogService.getAll().then((blogs) => {
+        setBlogs(blogs);
+      });
     }
     setLoading(false);
   }, []);
 
   if (loading) {
-    return (
-      <div></div>
-    )
+    return <div></div>;
   }
 
   if (!user) {
@@ -84,10 +81,15 @@ const Admin = () => {
     );
   }
 
+  const blogList = blogs.map((blog) => (
+    <BlogItem key={blog.id} id={blog.id} title={blog.title} content={blog.content} date={blog.date} />
+  ));
+
   return (
-    <div className="flex h-screen w-screen bg-gray-300">
-      <button type="button"> </button>
-      <button type="button" onClick={() => router.push("/admin/post")}>Submit a post</button> 
+    <div className="flex h-screen w-screen bg-gray-300 justify-center">
+      <div className="flex flex-col justify-center h-auto w-auto bg-gray-200 rounded shadow">
+        {blogList}
+      </div>
     </div>
   );
 };

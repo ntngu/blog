@@ -1,6 +1,8 @@
 import Header from "./Header";
 import { HomePage } from "@/types/homePage";
 import dynamic from "next/dynamic";
+import "@uiw/react-markdown-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 
 const MarkdownPreview = dynamic(
   () => import("@uiw/react-markdown-preview").then((mod) => mod.default),

@@ -1,11 +1,10 @@
 import react from "react";
-import "@uiw/react-markdown-editor/markdown-editor.css";
-import "@uiw/react-markdown-preview/markdown.css";
 import { Blog } from "../types/blog";
 import BlogService from "@/services/blogs";
 import HomePage from "./components/Home";
 import Blogs from "./components/Blogs";
 import About from "./components/About";
+import Error from "./components/Error";
 
 const Home = () => {
   const [blogs, setBlogs] = react.useState<Blog[]>([]);
@@ -42,8 +41,10 @@ const Home = () => {
       );
     case "Blogs":
       return <Blogs handleTabChange={handleTabChange} />;
-    default:
+    case "About":
       return <About handleTabChange={handleTabChange} />;
+    default:
+      return <Error handleTabChange={handleTabChange} />;
   }
 };
 
