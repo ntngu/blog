@@ -20,6 +20,7 @@ const Post = () => {
         title: title,
         content: content,
         date: new Date().toString(),
+        id: ""
       };
       const response = await blogService.create(blog);
       router.push("/admin");
