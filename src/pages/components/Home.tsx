@@ -11,7 +11,7 @@ const MarkdownPreview = dynamic(
 
 const HomePage = ({ handleTabChange, title, content }: HomePage) => {
   return (
-    <div className=" bg-[#0F151E] w-screen h-screen">
+    <div className=" bg-[#0F151E] w-screen h-screen overflow-auto">
       <Header handleTabChange={handleTabChange} />
       <div className="flex justify-center items-center flex-col">
         <h1 className="text-[#D3DAE0] text-3xl p-10">{title}</h1>
