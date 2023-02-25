@@ -38,6 +38,18 @@ const Admin = () => {
     }
   };
 
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await blogService.remove(id);
+    } catch (err) {
+      console.log(err);
+    }
+    blogService
+      .getAll()
+      .then((blogs) => setBlogs(blogs))
+      .catch((err) => console.log(err));
+  };
+
   const handleLogout = (event: react.FormEvent) => {
     event.preventDefault();
     window.localStorage.removeItem("userToken");
@@ -82,12 +94,32 @@ const Admin = () => {
   }
 
   const blogList = blogs.map((blog) => (
-    <BlogItem key={blog.id} id={blog.id} title={blog.title} content={blog.content} date={blog.date} />
+    <div className="flex flex-row items-center justify-center">
+      <BlogItem
+        key={blog.id}
+        id={blog.id}
+        title={blog.title}
+        content={blog.content}
+        date={blog.date}
+      />
+      <button 
+        onClick={() => handleDelete(blog.id as string)}
+        className="p-2 ml-auto shadow rounded bg-slate-200 hover:bg-slate-300"
+        type="button"
+      >
+        Delete
+      </button>
+    </div>
   ));
 
   return (
-    <div className="flex h-screen w-screen bg-gray-300 justify-center">
-      <div className="flex flex-col justify-center h-auto w-auto bg-gray-200 rounded shadow">
+    <div className="flex flex-col items-center h-screen w-screen overflow-auto bg-gray-300 justify-center">
+      <div className="flex flex-col justify-center w-96 align-middle bg-slate-100 shadow rounded p-10">
+        <button 
+          onClick={() => router.push("/admin/post")}
+          className="p-2 ml-auto self-end shadow rounded bg-slate-200 hover:bg-slate-300"
+          type="button"
+        >Post</button>
         {blogList}
       </div>
     </div>

@@ -1,7 +1,7 @@
 import react from "react";
 import { Blog } from "../types/blog";
-import BlogService from "@/services/blogs";
-import HomePage from "./components/Home";
+import blogService from "@/services/blogs";
+import BlogView from "./components/BlogView";
 import Blogs from "./components/Blogs";
 import About from "./components/About";
 import Error from "./components/Error";
@@ -15,10 +15,10 @@ const Home = () => {
   const [activeTab, setActiveTab] = react.useState<string>("Home");
 
   const getBlogs = async () => {
-    const response = await BlogService.getAll();
+    const response = await blogService.getAll();
     setBlogs(response);
-    setContent(response[response.length - 1].content);
-    setTitle(response[response.length - 1].title);
+    setContent(response[0].content);
+    setTitle(response[0].title);
   };
 
   react.useEffect(() => {
@@ -33,14 +33,14 @@ const Home = () => {
   switch (activeTab) {
     case "Home":
       return (
-        <HomePage
+        <BlogView
           handleTabChange={handleTabChange}
           content={content}
           title={title}
         />
       );
     case "Blogs":
-      return <Blogs handleTabChange={handleTabChange} />;
+      return <Blogs handleTabChange={handleTabChange} blogs={blogs} />;
     case "About":
       return <About handleTabChange={handleTabChange} />;
     default:
