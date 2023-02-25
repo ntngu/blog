@@ -9,10 +9,10 @@ import BlogView from "./BlogView";
 const Blogs = ({ handleTabChange, blogs }: Blogs) => {
   const blogList = blogs.map((blog) => (
     <li key={blog.id} className="flex justify-around text-xl">
-      <button className="text-[#D3DAE0] underline mr-10" type="button">
+      <button key={`title_${blog.id}`}className="text-[#D3DAE0] underline mr-10" type="button">
         {blog.title}
       </button>
-      <div className="text-[#D3DAE0]">
+      <div key={`date_${blog.id}`}className="text-[#D3DAE0]">
         {DateTime.fromISO(blog.date!).toLocaleString()}
       </div>
     </li>
