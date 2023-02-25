@@ -9,7 +9,7 @@ import BlogView from "./BlogView";
 const Blogs = ({ handleTabChange, blogs }: Blogs) => {
   const blogList = blogs.map(
     (blog) => (
-      <div>
+      <div key={blog.id}>
         <div className="flex justify-around text-xl">
           <button
             className="text-[#D3DAE0] underline mr-10"
