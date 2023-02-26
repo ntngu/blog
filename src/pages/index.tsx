@@ -1,10 +1,10 @@
 import react from "react";
 import { Blog } from "../types/blog";
 import blogService from "@/services/blogs";
-import BlogView from "./components/BlogView";
 import Blogs from "./components/Blogs";
 import About from "./components/About";
 import Error from "./components/Error";
+import HomeView from "./components/HomeView";
 
 const Home = () => {
   const [blogs, setBlogs] = react.useState<Blog[]>([]);
@@ -33,7 +33,7 @@ const Home = () => {
   switch (activeTab) {
     case "Home":
       return (
-        <BlogView
+        <HomeView
           handleTabChange={handleTabChange}
           content={content}
           title={title}
