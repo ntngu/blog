@@ -94,9 +94,9 @@ const Admin = () => {
   }
 
   const blogList = blogs.map((blog) => (
-    <div className="flex flex-row items-center justify-center">
+    <div key={blog.id} className="flex flex-row items-center justify-center">
       <BlogItem
-        key={blog.id}
+        key={`blog_${blog.id}`}
         id={blog.id}
         title={blog.title}
         content={blog.content}
