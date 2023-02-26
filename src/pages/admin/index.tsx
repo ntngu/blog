@@ -38,18 +38,6 @@ const Admin = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    try {
-      const response = await blogService.remove(id);
-    } catch (err) {
-      console.log(err);
-    }
-    blogService
-      .getAll()
-      .then((blogs) => setBlogs(blogs))
-      .catch((err) => console.log(err));
-  };
-
   const handleLogout = (event: react.FormEvent) => {
     event.preventDefault();
     window.localStorage.removeItem("userToken");
@@ -64,6 +52,20 @@ const Admin = () => {
   const passwordChange = (e: react.ChangeEvent<HTMLInputElement>) => {
     const value = (e.target as HTMLInputElement).value;
     setPassword(value);
+  };
+
+  const handleDelete = async (id: string) => {
+    if (window.confirm("Are you sure you want to delete?")) {
+      try {
+        const response = await blogService.getPost(id);
+        console.log(response);
+        const responseD = await blogService.remove(id);
+        const update = await blogService.getAll();
+        setBlogs(update);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   react.useEffect(() => {
@@ -101,14 +103,8 @@ const Admin = () => {
         title={blog.title}
         content={blog.content}
         date={blog.date}
+        handleDelete={handleDelete}
       />
-      <button 
-        onClick={() => handleDelete(blog.id as string)}
-        className="p-2 ml-auto shadow rounded bg-slate-200 hover:bg-slate-300"
-        type="button"
-      >
-        Delete
-      </button>
     </div>
   ));
 

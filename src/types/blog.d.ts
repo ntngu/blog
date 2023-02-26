@@ -3,4 +3,5 @@ export interface Blog {
   date: string | undefined;
   content: string | undefined;
   id: string | undefined;
+  handleDelete(str: string): void;
 }

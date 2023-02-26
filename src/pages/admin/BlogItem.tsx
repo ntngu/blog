@@ -3,8 +3,9 @@ import "@uiw/react-markdown-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 import { Blog } from "@/types/blog";
 import { DateTime } from "luxon";
+import blogService from "@/services/blogs";
 
-const BlogItem = ({ title, content, date, id }: Blog) => {
+const BlogItem = ({ title, content, date, id, handleDelete }: Blog) => {
   const router = useRouter();
 
   return (
@@ -21,6 +22,13 @@ const BlogItem = ({ title, content, date, id }: Blog) => {
         onClick={() => router.push(`/admin/edit/${id}`)}
       >
         Edit
+      </button>
+      <button 
+        onClick={() => handleDelete(id!)}
+        className="p-2 ml-auto shadow rounded bg-slate-200 hover:bg-slate-300"
+        type="button"
+      >
+        Delete
       </button>
     </div>
   );
