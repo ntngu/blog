@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const BlogItem = (id: string) => {
-  return (
-    <div></div>
-  )
-}
+  return <div></div>;
+};
+
+export default BlogItem;
