@@ -7,7 +7,7 @@ import { DateTime } from "luxon";
 import BlogView from "./BlogView";
 
 const Blogs = ({ handleTabChange, blogs }: Blogs) => {
-  const blogList = blogs.map((blog) => (
+  const blogList = blogs && blogs.map((blog) => (
     <li key={blog.id} className="flex justify-around text-xl">
       <button className="text-[#D3DAE0] underline mr-10" type="button">
         {blog.title}
