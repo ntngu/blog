@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import "@uiw/react-markdown-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
-import { Blog } from "@/types/blog";
+import { BlogEdit } from "@/types/blogEdit";
 import { DateTime } from "luxon";
 import blogService from "@/services/blogs";
 
-const BlogItem = ({ title, content, date, id, handleDelete }: Blog) => {
+const BlogItem = ({ title, content, date, id, handleDelete }: BlogEdit) => {
   const router = useRouter();
 
   return (
